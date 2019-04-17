@@ -1,6 +1,12 @@
 
+
+const path = require('path');
+
 module.exports = {
     extraBabelPlugins: [
         ["import", {"libraryName": "antd", "style": "css"}]
     ],
+    alias: { 
+        Components: path.resolve(__dirname, 'src/components/'), 
+    },
 }
