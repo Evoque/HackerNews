@@ -9,6 +9,9 @@ This repository contains all resources of the micro project:
 
 #### File Tree
 
-> ├─proto               # Prototype Design files
-> ├─src                  # Belows are common dva files
-> └─...
+```json
+├─proto               # Prototype Design files
+├─src                  # Belows are common dva files
+└─...
+```
+
