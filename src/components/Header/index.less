@@ -1,0 +1,50 @@
+@import '~Common/variables.less';
+
+.headerContainer {
+    background-color: @colorMain;
+    color: #fff;
+
+    .logo { 
+        img {
+            width: 24px;
+            height: 24px;
+            border: 2px #fff solid;
+        }
+
+    }
+
+    :global {
+        .ant-menu {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: transparent;
+            border: none;
+            color: rgba(255, 255, 255, .7);
+            font-size: 1.2em;
+            line-height: 52px;
+            padding-bottom: 4px;
+
+            &.ant-menu-horizontal {
+
+                .ant-menu-item {
+                    border: none;
+                    transition: all .1s ease; 
+                }
+
+                &>.ant-menu-item-selected {
+                    color: #fff;
+                    border: none;
+                    font-weight: bold;
+                }
+
+                &>.ant-menu-item:hover,
+                &>.ant-menu-item-active {
+                    color: #fff;
+                    border: none;
+                }
+
+            }
+
+        }
+    }
+}
