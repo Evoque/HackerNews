@@ -10,7 +10,7 @@ export default {
 
   state: {
     currentStory: STORIES[0].value,
-    stoties: []
+    stories: []
   },
 
   subscriptions: {
