@@ -8,6 +8,6 @@ module.exports = {
     ],
     alias: { 
         Components: path.resolve(__dirname, 'src/components/'), 
-        Common: path.resolve(__dirname, 'src/common/')
+        Common: path.resolve(__dirname, 'src/common/'),
     },
 }

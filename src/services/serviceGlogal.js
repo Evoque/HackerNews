@@ -6,10 +6,9 @@ function createAPI({config, version}) {
   return Firebase.database().ref(version)
 }
 
-function fetch(child) {
-  console.log(`fetching ${child}...`)
+function fetch(urlpath) { 
   return new Promise((resolve, reject) => {
-    api.child(child).once('value', snapshot => {
+    api.child(urlpath).once('value', snapshot => {
       const val = snapshot.val() 
       if (val) val.__lastUpdated = Date.now();
       resolve(val)
@@ -24,6 +23,21 @@ const api = createAPI({
   }
 })
   
-export function fetchStoriesByType(type) { 
+export function fetchStoryIDSByType(type) { 
   return fetch(`${type}stories`); 
 }
+ 
+export function fetchUser(id){
+  return fetch(`user/${id}`);
+}
+
+export function fetchStoryByID(id){
+  return fetch(`item/${id}`);
+}
+
+export function fetchStories(ids){
+  return Promise.all(ids.map(id => fetchStoryByID(id)));
+}
+
+
+
