@@ -1,8 +1,10 @@
 
 
 
-const IS_DEV = process.env.NODE_ENV === 'development';
+// const IS_DEV = process.env.NODE_ENV === 'development';
 
-const BaseUrl = IS_DEV ? 'dev url' : 'prod url';
+const baseUrl = 'https://hacker-news.firebaseio.com';
+const version = 'v0';
+const Url = `${baseUrl}/${version}`; 
 
-export default BaseUrl;
+export default Url;

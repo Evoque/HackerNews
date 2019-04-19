@@ -5,7 +5,7 @@ import axios from 'axios';
 /**
  *  config: axios设置信息， 如header
  */
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 const fetch = options => {
 
   const { method = 'get', data, url, config } = options;
