@@ -28,20 +28,9 @@ This repository contains all resources of the micro project:
   - [ ] vote / unvote
 - [ ] comment list page
 - [ ] comment detail page
-  - [ ] header
-     - [ ] style
-     - [ ] input area
-     - [ ] add comment
-     - [ ] other, like/dislike..
-  - [ ] comments: collapsible, render link, add comment, 
-    - [ ] item style
-    - [ ] render link
-    - [ ] collapsible
-    - [ ] func: add comment, show more subcomments
-  - [ ] subcomments:
-    - [ ] subitem style
-    - [ ] add subcomment
-    - [ ] hide
+  - [ ] header: style, input area, add comment, like/dislike..
+  - [ ] comments: item style, render link, collapsible,add comment, show more subcomments
+  - [ ] subcomments: subitem style, add subcomment, hide
 - [ ] user page
 - [ ] engineering
   - [ ] code splitting
