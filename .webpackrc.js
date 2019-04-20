@@ -4,11 +4,14 @@ const path = require('path');
 
 module.exports = {
     extraBabelPlugins: [
-        ["import", {"libraryName": "antd", "style": "css"}]
+        ["import", {"libraryName": "antd", libraryDirectory: 'es', style: true }]
     ],
-    alias: { 
-        Components: path.resolve(__dirname, 'src/components/'), 
+    alias: {
+        Components: path.resolve(__dirname, 'src/components/'),
         Common: path.resolve(__dirname, 'src/common/'),
         Utils: path.resolve(__dirname, 'src/utils/')
     },
+    theme: {
+        'primary-color': '#ff6600', 
+    } 
 }

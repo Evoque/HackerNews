@@ -1,7 +1,9 @@
 
 import React from 'react';
+import {Input, Button} from 'antd';
 import styles from './index.less';
 
+const {TextArea} = Input;
 const item = {
     by: "directionless",
     descendants: 5,
@@ -18,16 +20,26 @@ const item = {
 };
 
 export default class Item extends React.Component {
- 
+
     render() {
+
+        const kidsLen = item.kids.length;
+        const commentStr = kidsLen > 1 ? ` ${kidsLen} comments` : ` ${kidsLen} comment`;
         return (
-            <div>
+            <div className={styles.itemContainer}>
                 <div className={styles.itemHeader}>
                     <div>
-                        <span>{item.title}</span>
+                        <h1 className={styles.title}>{item.title}</h1>
                         <span>{` (${item.host}) `}</span>
-                        <span></span>
                     </div>
+                    <div>
+                        <span>{`${item.score} points by `}</span>
+                        <span className={styles.author}>{item.by}</span>
+                        <span>{` ${item.timeStamp} ago |`}</span>
+                        <span>{commentStr}</span>
+                    </div>
+                    <TextArea placeholder="add comment here..." autosize={{minRows: 2}} />
+                    <Button type="primary">add comment</Button>
                 </div>
                 <div className={styles.commentList}>
 

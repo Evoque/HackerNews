@@ -35,3 +35,8 @@ This repository contains all resources of the micro project:
 - [ ] engineering
   - [ ] code splitting
   - [ ] SSR?
+
+
+
+## ?
+1. How to detect the user voted or not? the user's `submitted` doesn't contain the voted ids.

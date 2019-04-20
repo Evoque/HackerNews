@@ -3,7 +3,7 @@
 import React from 'react';
 import Header from 'Components/Header';
 // import ItemList from './../ItemList';
-import Comment from '../Item';
+import Item from '../Item';
 import styles from './index.less';
 
 class Home extends React.Component {
@@ -16,7 +16,7 @@ class Home extends React.Component {
                 <div className={styles.storyContainer}>
                     <div className={styles.storyContent}>
                         {/* <ItemList /> */}
-                        <Comment />
+                        <Item />
                     </div>
                 </div>
             </div>

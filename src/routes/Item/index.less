@@ -1,0 +1,31 @@
+@import '~Common/variables.less';
+
+.itemContainer { 
+    &>div {
+        padding: 15px 30px;
+        background-color: #fff;
+        border-radius: 4px;
+    }
+
+    .commentList {
+        margin-top: 20px;
+    }
+
+    .itemHeader {
+        .title { 
+            display: inline-block;
+            margin-bottom: 0;
+            margin-right: 10px; 
+        }
+
+        .author {
+            text-decoration: underline;
+        }
+
+        :global {
+            .ant-input {
+                margin-top: 10px; 
+            }
+        } 
+    }
+}
