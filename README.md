@@ -18,13 +18,31 @@ This repository contains all resources of the micro project:
 ## ToDo
 - [ ] prototype
   - [x] home page & with pager
-  - [ ] comment page
+  - [x] comment page
   - [ ] user page
 - [x] request api (firebase)
 - [ ] home page
   - [x] container panel style
   - [x] item panel style
   - [ ] grey out readed stories 
-  - [ ] like(unlike?)
-- [ ] comment page
+  - [ ] vote / unvote
+- [ ] comment list page
+- [ ] comment detail page
+  - [ ] header
+     - [ ]: style
+     - [ ]: input area
+     - [ ]: add comment
+     - [ ]: other, like/dislike..
+  - [ ] comments: collapsible, render link, add comment, 
+    - [ ] item style
+    - [ ] render link
+    - [ ] collapsible
+    - [ ] func: add comment, show more subcomments
+  - [ ] subcomments:
+    - [ ] subitem style
+    - [ ] add subcomment
+    - [ ] hide
 - [ ] user page
+- [ ] engineering
+  - [ ] code splitting
+  - [ ] SSR?
