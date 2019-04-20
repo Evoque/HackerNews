@@ -17,13 +17,13 @@ This repository contains all resources of the micro project:
 
 ## ToDo
 - [ ] prototype
-  - [ ] home page & with pager
+  - [x] home page & with pager
   - [ ] comment page
   - [ ] user page
-- [ ] request api (firebase)
+- [x] request api (firebase)
 - [ ] home page
-  - [ ] container panel style
-  - [ ] item panel style
+  - [x] container panel style
+  - [x] item panel style
   - [ ] grey out readed stories 
   - [ ] like(unlike?)
 - [ ] comment page
