@@ -3,6 +3,8 @@
 const extractHost = url => {
     if(!url) return '';
     let host = url.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
-    if(host.indexOf('wwww.') === 0) host = host.replace('www.', '');
+    if(host.indexOf('www.') === 0) host = host.replace('www.', '');
     return host;
 }
+
+export { extractHost };

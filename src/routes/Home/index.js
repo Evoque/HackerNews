@@ -10,7 +10,7 @@ import styles from './index.less';
 class Home extends React.Component {
 
     render() {
-        const {stories} = this.props;
+        const {stories = []} = this.props;
         const firstLoad = stories.length === 1 && !stories[0]
         return (
             <div>
@@ -36,3 +36,4 @@ export default connect(
         stories: modelGlobal.stories
     })
 )(Home);
+ 

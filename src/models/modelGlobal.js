@@ -2,6 +2,7 @@
 
 // import * as serviceGlobal from './../services/serviceGlogal';
 import {STORIES} from 'Common/constants';
+import {extractHost} from 'Utils/helper';
 
 
 const initStories = new Array(1);
@@ -153,8 +154,10 @@ export default {
           __lastUpdated: 1555677549810,
         }
       ];
-      yield new Promise(r => setTimeout(r, 2000));
-      yield put({type: 'save', payload: {stories: tempStories}});
+
+      const stories = tempStories.map(x => ({...x, host: extractHost(x.url)}));
+      yield new Promise(r => setTimeout(r, 1000));
+      yield put({type: 'save', payload: {stories}});
     }
   },
 
