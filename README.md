@@ -19,7 +19,7 @@ This repository contains all resources of the micro project:
 - [ ] prototype
   - [x] home page & with pager
   - [x] comment page
-  - [ ] user page
+  - [x] user page: Login, Register
 - [x] request api (firebase)
 - [ ] home page
   - [x] container panel style

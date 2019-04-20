@@ -3,7 +3,8 @@
 import React from 'react';
 import Header from 'Components/Header';
 // import ItemList from './../ItemList';
-import Item from '../Item';
+// import Item from '../Item';
+import Login from './../User/Login';
 import styles from './index.less';
 
 class Home extends React.Component {
@@ -16,7 +17,8 @@ class Home extends React.Component {
                 <div className={styles.storyContainer}>
                     <div className={styles.storyContent}>
                         {/* <ItemList /> */}
-                        <Item />
+                        {/* <Item /> */}
+                        <Login />
                     </div>
                 </div>
             </div>

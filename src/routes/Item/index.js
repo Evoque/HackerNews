@@ -47,15 +47,7 @@ const subComment1 = {
     "text": "I completely disregard this rule. I find it much more helpful to be able to include more context in the message (even the first line).<p>I have a similar policy about line-lengths in code files. Sure, lines can be too long, but I find that codebases with strict line-length policies tend to have the opposite problem: too much vertical drift which makes it hard to see the big-picture of what is going on in the file.",
     "time": 1555754618,
     "type": "comment"
-};
-const subComment2 = {
-    "by": "nicoburns",
-    "id": 19705222,
-    "parent": 19705269,
-    "text": "I completely disregard this rule. I find it much more helpful to be able to include more context in the message (even the first line).<p>I have a similar policy about line-lengths in code files. Sure, lines can be too long, but I find that codebases with strict line-length policies tend to have the opposite problem: too much vertical drift which makes it hard to see the big-picture of what is going on in the file.",
-    "time": 1555754618,
-    "type": "comment"
-};
+}; 
 
 const comment1 = {
     "by": "chipotle_coyote1",
