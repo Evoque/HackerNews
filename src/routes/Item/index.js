@@ -1,6 +1,9 @@
 
 import React from 'react';
-import {Input, Button} from 'antd';
+import {Input, Button, Collapse} from 'antd';
+// import he from 'he';
+import linker from 'Utils/linker';
+import parse from 'html-react-parser';
 import styles from './index.less';
 
 const {TextArea} = Input;
@@ -19,12 +22,35 @@ const item = {
     __lastUpdated: 1555677549810
 };
 
+const comment = {
+    "by": "chipotle_coyote",
+    "id": 19705269,
+    "kids": [19705676, 19705743, 19705330],
+    "parent": 19704486,
+    "text": "While I&#x27;ve naturally gravitated toward the &quot;capitalize and use the imperative,&quot; I&#x27;ve never been down with the &quot;good commit messages are 50 characters or less&quot; mantra. Why 50? Is there an important tool that breaks if my commit message is 55, 60 or even (gasp) 70 characters? Is there a real case to be made that &quot;Add total vocab entries per capsule limitation&quot; is a good commit message that becomes an utter irresponsible trash fire if one spells the entire word &quot;vocabulary?&quot;<p>Yes, short, clear commit messages are good. I&#x27;m not saying &quot;write a paragraph&quot;; I&#x27;m not even saying that it&#x27;s bad to have an arbitrary maximum length beyond which a commit message can be considered poor form. It&#x27;s just that 50 is a <i>weirdly</i> arbitrary choice.",
+    "time": 1555745299,
+    "type": "comment"
+};
+
+const comment1 = {
+    "by": "chipotle_coyote1",
+    "id": 19705270,
+    "kids": [19705676, 19705743, 19705330],
+    "parent": 19704486,
+    "text": "While I&#x27;ve naturally gravitated https://www.baidu.com arbitrary choice.",
+    "time": 1555745299,
+    "type": "comment"
+};
+
+const Panel = Collapse.Panel;
+
 export default class Item extends React.Component {
 
     render() {
 
         const kidsLen = item.kids.length;
         const commentStr = kidsLen > 1 ? ` ${kidsLen} comments` : ` ${kidsLen} comment`;
+
         return (
             <div className={styles.itemContainer}>
                 <div className={styles.itemHeader}>
@@ -38,11 +64,25 @@ export default class Item extends React.Component {
                         <span>{` ${item.timeStamp} ago |`}</span>
                         <span>{commentStr}</span>
                     </div>
-                    <TextArea placeholder="add comment here..." autosize={{minRows: 2}} />
+                    <TextArea
+                        placeholder="add comment here..."
+                        autosize={{minRows: 3, maxRows: 15}}
+                    />
                     <Button type="primary">add comment</Button>
                 </div>
                 <div className={styles.commentList}>
-
+                    <Collapse bordered={false} defaultActiveKey={['1']}>
+                        <Panel header="This is panel header 1" key="1">
+                            {parse(linker(comment.text, {
+                                attributes: {target: '_blank', rel: 'noopener noreferrer'}
+                            }))}
+                        </Panel>
+                        <Panel header="This is panel header 2" key="2">
+                            {parse(linker(comment1.text, {
+                                attributes: {target: '_blank', rel: 'noopener noreferrer'}
+                            }))}
+                        </Panel>
+                    </Collapse>
                 </div>
             </div>
         )
