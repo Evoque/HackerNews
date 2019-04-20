@@ -4,13 +4,14 @@
 import {STORIES} from 'Common/constants';
 
 
+const initStories = new Array(1);
 export default {
 
   namespace: 'modelGlobal',
 
   state: {
     currentStory: STORIES[0].value,
-    stories: []
+    stories: initStories
   },
 
   subscriptions: {
@@ -22,7 +23,8 @@ export default {
 
   effects: {
     *QUERY_STORY_IDS({payload: {type}}, {call, put}) {
-      yield put({type: 'save', payload: {currentStory: type}});
+      console.log(`query:${type}`);
+      yield put({type: 'save', payload: {currentStory: type, stories: initStories}});
       // const ids = yield call(serviceGlobal.fetchStoryIDSByType, type);
       // ids: ids.splice(0, 10)
       yield put({type: 'QUERY_STORIES', payload: {}});
@@ -65,9 +67,93 @@ export default {
           type: "story",
           url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
           __lastUpdated: 1555677549810,
+        },
+        {
+          by: "sohkamyung",
+          descendants: 105,
+          id: 19695511,
+          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
+          score: 432,
+          time: 1555629108,
+          title: "Mozilla WebThings",
+          type: "story",
+          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
+          __lastUpdated: 1555677549810,
+        },
+        {
+          by: "sohkamyung",
+          descendants: 105,
+          id: 19695512,
+          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
+          score: 432,
+          time: 1555629108,
+          title: "Mozilla WebThings",
+          type: "story",
+          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
+          __lastUpdated: 1555677549810,
+        },
+        {
+          by: "sohkamyung",
+          descendants: 105,
+          id: 19695513,
+          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
+          score: 432,
+          time: 1555629108,
+          title: "Mozilla WebThings",
+          type: "story",
+          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
+          __lastUpdated: 1555677549810,
+        },
+        {
+          by: "sohkamyung",
+          descendants: 105,
+          id: 19695514,
+          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
+          score: 432,
+          time: 1555629108,
+          title: "Mozilla WebThings",
+          type: "story",
+          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
+          __lastUpdated: 1555677549810,
+        },
+        {
+          by: "sohkamyung",
+          descendants: 105,
+          id: 19695515,
+          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
+          score: 432,
+          time: 1555629108,
+          title: "Mozilla WebThings",
+          type: "story",
+          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
+          __lastUpdated: 1555677549810,
+        },
+        {
+          by: "sohkamyung",
+          descendants: 105,
+          id: 19695516,
+          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
+          score: 432,
+          time: 1555629108,
+          title: "Mozilla WebThings",
+          type: "story",
+          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
+          __lastUpdated: 1555677549810,
+        },
+        {
+          by: "sohkamyung",
+          descendants: 105,
+          id: 19695517,
+          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
+          score: 432,
+          time: 1555629108,
+          title: "Mozilla WebThings",
+          type: "story",
+          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
+          __lastUpdated: 1555677549810,
         }
       ];
-      yield new Promise(r => setTimeout(r, 500));
+      yield new Promise(r => setTimeout(r, 2000));
       yield put({type: 'save', payload: {stories: tempStories}});
     }
   },
