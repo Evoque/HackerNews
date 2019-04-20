@@ -2,7 +2,7 @@
 
 // import * as serviceGlobal from './../services/serviceGlogal';
 import {STORIES} from 'Common/constants';
-import {extractHost} from 'Utils/helper';
+import {extractHost, calcTime} from 'Utils/helper';
 
 
 const initStories = new Array(1);
@@ -155,7 +155,11 @@ export default {
         }
       ];
 
-      const stories = tempStories.map(x => ({...x, host: extractHost(x.url)}));
+      const stories = tempStories.map(x => ({
+        ...x, 
+        host: extractHost(x.url),
+        timeStamp: calcTime(x.time)
+      }));
       yield new Promise(r => setTimeout(r, 1000));
       yield put({type: 'save', payload: {stories}});
     }
