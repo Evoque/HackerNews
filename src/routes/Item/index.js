@@ -32,6 +32,31 @@ const comment = {
     "type": "comment"
 };
 
+const subComment = {
+    "by": "nicoburns",
+    "id": 19705676,
+    "parent": 19705269,
+    "text": "I completely disregard this rule. http://www.google.cn ",
+    "time": 1555754618,
+    "type": "comment"
+};
+const subComment1 = {
+    "by": "nicoburns",
+    "id": 19705111,
+    "parent": 19705269,
+    "text": "I completely disregard this rule. I find it much more helpful to be able to include more context in the message (even the first line).<p>I have a similar policy about line-lengths in code files. Sure, lines can be too long, but I find that codebases with strict line-length policies tend to have the opposite problem: too much vertical drift which makes it hard to see the big-picture of what is going on in the file.",
+    "time": 1555754618,
+    "type": "comment"
+};
+const subComment2 = {
+    "by": "nicoburns",
+    "id": 19705222,
+    "parent": 19705269,
+    "text": "I completely disregard this rule. I find it much more helpful to be able to include more context in the message (even the first line).<p>I have a similar policy about line-lengths in code files. Sure, lines can be too long, but I find that codebases with strict line-length policies tend to have the opposite problem: too much vertical drift which makes it hard to see the big-picture of what is going on in the file.",
+    "time": 1555754618,
+    "type": "comment"
+};
+
 const comment1 = {
     "by": "chipotle_coyote1",
     "id": 19705270,
@@ -73,9 +98,33 @@ export default class Item extends React.Component {
                 <div className={styles.commentList}>
                     <Collapse bordered={false} defaultActiveKey={['1']}>
                         <Panel header="This is panel header 1" key="1">
-                            {parse(linker(comment.text, {
-                                attributes: {target: '_blank', rel: 'noopener noreferrer'}
-                            }))}
+                            <div>
+                                <span>
+                                    {parse(linker(comment.text, {
+                                        attributes: {target: '_blank', rel: 'noopener noreferrer'}
+                                    }))}
+                                </span>
+
+                            </div>
+                            <div className={styles.subComment}>
+                                <div className={styles.subCommentItem}>
+                                    <span>
+                                        {parse(linker(subComment.text, {
+                                            attributes: {target: '_blank', rel: 'noopener noreferrer'}
+                                        }))}
+                                    </span>
+                                    <span> by droop 1 hour ago</span>
+                                </div>
+                                <div className={styles.subCommentItem}>
+                                    {parse(linker(subComment1.text, {
+                                        attributes: {target: '_blank', rel: 'noopener noreferrer'}
+                                    }))}
+                                </div>
+                                {/* <span className={styles.labelBtn}>add comment</span> */}
+                                <span className={styles.labelBtn}>
+                                    show <strong>12</strong> more comments
+                                </span>
+                            </div>
                         </Panel>
                         <Panel header="This is panel header 2" key="2">
                             {parse(linker(comment1.text, {
