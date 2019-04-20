@@ -29,10 +29,10 @@ This repository contains all resources of the micro project:
 - [ ] comment list page
 - [ ] comment detail page
   - [ ] header
-     - [ ]: style
-     - [ ]: input area
-     - [ ]: add comment
-     - [ ]: other, like/dislike..
+     - [ ] style
+     - [ ] input area
+     - [ ] add comment
+     - [ ] other, like/dislike..
   - [ ] comments: collapsible, render link, add comment, 
     - [ ] item style
     - [ ] render link
