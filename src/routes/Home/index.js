@@ -1,27 +1,22 @@
 
 
 import React from 'react';
-import {connect} from 'dva';
 import Header from 'Components/Header';
-import Item from 'Components/Item';
-import Skeleton from 'Components/Skeleton';
+// import ItemList from './../ItemList';
+import Comment from '../Item';
 import styles from './index.less';
 
 class Home extends React.Component {
 
     render() {
-        const {stories = []} = this.props;
-        const firstLoad = stories.length === 1 && !stories[0]
+
         return (
             <div>
                 <Header />
                 <div className={styles.storyContainer}>
                     <div className={styles.storyContent}>
-                        {
-                            firstLoad ?
-                                <Skeleton /> :
-                                stories.map(x => <Item key={x.id} item={x} />)
-                        }
+                        {/* <ItemList /> */}
+                        <Comment />
                     </div>
                 </div>
             </div>
@@ -30,10 +25,4 @@ class Home extends React.Component {
 
 }
 
-
-export default connect(
-    ({modelGlobal}) => ({
-        stories: modelGlobal.stories
-    })
-)(Home);
- 
+export default Home;
