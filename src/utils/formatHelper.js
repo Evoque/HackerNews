@@ -31,7 +31,6 @@ const calcTime = time => {
     num = ~~num;
 
     return num > 1 ? `${num} ${label}s` : `${num} ${label}`;
-
 }
-
-export {extractHost, calcTime};
+ 
+export default window.localStorage.getItem('user');

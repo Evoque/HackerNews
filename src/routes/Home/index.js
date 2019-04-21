@@ -5,14 +5,13 @@ import {router} from 'dva';
 import Header from 'Components/Header';
 import ItemList from './../ItemList';
 // import Item from '../Item';
-import Login from './../User/Login';
+import User from './../User';
 import styles from './index.less';
 
 const {Route, Switch} = router;
 class Home extends React.Component {
 
-    render() {
-        console.log(this.props);
+    render() { 
         const {type} = this.props.match.params;
         return (
             <div>
@@ -23,7 +22,7 @@ class Home extends React.Component {
                         {/* <Item /> */}
                         {/* <Login /> */}
                         <Switch>
-                            <Route path="/user" component={() => <Login />} />
+                            <Route path="/user" component={() => <User />} />
                             <Route path="/" component={props => <ItemList {...props} type={type} />} />
                         </Switch>
                     </div>

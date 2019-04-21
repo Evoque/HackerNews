@@ -2,8 +2,8 @@
 
 import * as serviceGlobal from './../services/serviceGlogal';
 import {STORIES} from 'Common/constants';
-import {extractHost, calcTime} from 'Utils/helper';
-
+import formatHelper from 'Utils/formatHelper';
+import storageHelper from 'Utils/storageHelper';
 
 const initStories = new Array(1);
 export default {
@@ -16,6 +16,7 @@ export default {
     currentPage: 1,
     pageSize: 15,
     stories: initStories,
+    userInfo: undefined
   },
 
   subscriptions: {
@@ -27,10 +28,10 @@ export default {
 
   effects: {
     *QUERY_STORY_IDS({payload: {type}}, {call, put}) {
-      if(!type) return;
+      if (!type) return;
       console.log(`fetch  ${type}`);
       yield put({type: 'save', payload: {currentStoryType: type, stories: initStories}});
-      const ids = yield call(serviceGlobal.fetchStoryIDSByType, type); 
+      const ids = yield call(serviceGlobal.fetchStoryIDSByType, type);
       yield put({type: 'save', payload: {totalIDs: ids}});
       yield put({type: 'QUERY_STORIES', payload: {page: 1}});
     },
@@ -63,12 +64,18 @@ export default {
       const stories = (yield call(serviceGlobal.fetchStories, aimIDs))
         .map(x => ({
           ...x,
-          host: extractHost(x.url),
-          timeStamp: calcTime(x.time)
+          host: formatHelper.extractHost(x.url),
+          timeStamp: formatHelper.calcTime(x.time)
         }));
       yield put({type: 'save', payload: {stories}});
+    },
 
+    *QUERY_USER({payload: {username}}, {call, put}) {
+      const userInfo = yield call(serviceGlobal.fetchUser, username);
+      storageHelper.setUser(userInfo);
+      yield put({type: 'save', payload: {userInfo}});
     }
+
   },
 
   reducers: {
