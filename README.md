@@ -26,13 +26,13 @@ This repository contains all resources of the micro project:
   - [x] item panel style
   - [x] grey out readed stories 
   - [ ] ~~vote / unvote:~~ *not find the api*
-- [ ] comment list page
+- [ ] ~~comment list page~~, *not find the api*
 - [ ] comment detail page
   - [x] header: style, input area, add comment, `like/dislike ?`..
   - [x] comments: item style, render link, collapsible,add comment, show more subcomments
   - [x] subcomments: subitem style, add subcomment, hide
   - [ ] interaction
-- [ ] user page
+- [x] user page
 - [ ] engineering
   - [ ] code splitting
   - [ ] SSR?

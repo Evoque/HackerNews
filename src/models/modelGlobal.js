@@ -7,6 +7,7 @@ import storageHelper from 'Utils/storageHelper';
 
 const initStories = new Array(1);
 const visitedIDs = storageHelper.getVisitedIDs();
+const user = storageHelper.getUser();
 export default {
 
   namespace: 'modelGlobal',
@@ -18,7 +19,7 @@ export default {
     currentPage: 1,
     pageSize: 15,
     stories: initStories,
-    userInfo: undefined
+    userInfo: user
   },
 
   subscriptions: {
@@ -75,6 +76,7 @@ export default {
     *QUERY_USER({payload: {username}}, {call, put}) {
       const userInfo = yield call(serviceGlobal.fetchUser, username);
       storageHelper.setUser(userInfo);
+      console.log(userInfo);
       yield put({type: 'save', payload: {userInfo}});
     }
 

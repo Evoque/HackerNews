@@ -1,18 +1,18 @@
 
 
 import React from 'react';
-import storageHelper from 'Utils/storageHelper';
+import {connect} from 'dva'; 
 import Login from './Login';
 import Profile from './Profile';
 
 class User extends React.Component {
 
     render() {
-        const isLogin = storageHelper.isLogin();
-        if (!isLogin) return <Login />
-        return <Profile />
+        const {userInfo} = this.props;
+        if (userInfo) return <Profile userInfo={userInfo} />;
+        return <Login />;
     }
 
 }
 
-export default User;
+export default connect(({modelGlobal}) => ({userInfo: modelGlobal.userInfo}))(User);

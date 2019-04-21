@@ -1,14 +1,12 @@
 import React from 'react';
 import {Card, Avatar, Row, Icon} from 'antd';
-import storageHelper from 'Utils/storageHelper';
 import formatHelper from 'Utils/formatHelper';
 import styles from './Profile.less';
 
 const centerStyle = {textAlign: 'center'};
 
-export default () => {
-    const user = storageHelper.loginnedUser();
-    const {id, created, submitted} = user
+export default ({userInfo}) => {
+    const {id, created, submitted} = userInfo;
     return (
         <Card style={{width: 500, margin: '20px auto'}} >
             <Row style={centerStyle}>

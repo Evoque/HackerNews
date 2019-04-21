@@ -18,6 +18,13 @@ export default {
     setUser: (user) => {
         window.localStorage.setItem(KEY_USER, JSON.stringify(user));
     },
+    getUser: () => { 
+        const userStr =  window.localStorage.getItem(KEY_USER);
+        if(userStr) {
+            return JSON.parse(userStr);
+        }
+        return undefined;
+    },
 
     setVisitedIDs: ids => {
         window.localStorage.setItem(KEY_IDS, JSON.stringify(ids));
