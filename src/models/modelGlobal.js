@@ -1,6 +1,6 @@
 
 
-// import * as serviceGlobal from './../services/serviceGlogal';
+import * as serviceGlobal from './../services/serviceGlogal';
 import {STORIES} from 'Common/constants';
 import {extractHost, calcTime} from 'Utils/helper';
 
@@ -11,8 +11,11 @@ export default {
   namespace: 'modelGlobal',
 
   state: {
-    currentStory: STORIES[0].value,
-    stories: initStories
+    currentStoryType: STORIES[0].value,
+    totalIDs: [],
+    currentPage: 1,
+    pageSize: 15,
+    stories: initStories,
   },
 
   subscriptions: {
@@ -23,145 +26,46 @@ export default {
   },
 
   effects: {
-    *QUERY_STORY_IDS({payload: {type}}, {call, put}) {
-      console.log(`query:${type}`);
-      yield put({type: 'save', payload: {currentStory: type, stories: initStories}});
-      // const ids = yield call(serviceGlobal.fetchStoryIDSByType, type);
-      // ids: ids.splice(0, 10)
-      yield put({type: 'QUERY_STORIES', payload: {}});
+    *QUERY_STORY_IDS({payload: {type = STORIES[0].value}}, {call, put}) {
+      yield put({type: 'save', payload: {currentStoryType: type, stories: initStories}});
+      const ids = yield call(serviceGlobal.fetchStoryIDSByType, type);
+      yield put({type: 'save', payload: {totalIDs: ids}});
+      yield put({type: 'QUERY_STORIES', payload: {page: 1}});
     },
-    *QUERY_STORIES({payload: {ids}}, {call, put}) {
-      // const stories = yield call(serviceGlobal.fetchStories, ids);
-      // console.log(stories);
-      var tempStories = [
-        {
-          by: "chwolfe",
-          descendants: 0,
-          id: 19698598,
-          score: 17,
-          time: 1555673078,
-          title: "Learning Parser Combinators with Rust",
-          type: "story",
-          url: "https://bodil.lol/parser-combinators/",
-          __lastUpdated: 1555677549809,
-        },
-        {
-          by: "directionless",
-          descendants: 5,
-          id: 19698834,
-          kids: [19699022, 19698985, 19698997, 19698975],
-          score: 20,
-          time: 1555675630,
-          title: "Fastly S-1",
-          type: "story",
-          url: "https://www.sec.gov/Archives/edgar/data/1517413/000119312519111675/d702138ds1.htm",
-          __lastUpdated: 1555677549810,
-        },
-        {
-          by: "sohkamyung",
-          descendants: 105,
-          id: 19695595,
-          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
-          score: 432,
-          time: 1555629108,
-          title: "Mozilla WebThings",
-          type: "story",
-          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
-          __lastUpdated: 1555677549810,
-        },
-        {
-          by: "sohkamyung",
-          descendants: 105,
-          id: 19695511,
-          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
-          score: 432,
-          time: 1555629108,
-          title: "Mozilla WebThings",
-          type: "story",
-          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
-          __lastUpdated: 1555677549810,
-        },
-        {
-          by: "sohkamyung",
-          descendants: 105,
-          id: 19695512,
-          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
-          score: 432,
-          time: 1555629108,
-          title: "Mozilla WebThings",
-          type: "story",
-          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
-          __lastUpdated: 1555677549810,
-        },
-        {
-          by: "sohkamyung",
-          descendants: 105,
-          id: 19695513,
-          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
-          score: 432,
-          time: 1555629108,
-          title: "Mozilla WebThings",
-          type: "story",
-          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
-          __lastUpdated: 1555677549810,
-        },
-        {
-          by: "sohkamyung",
-          descendants: 105,
-          id: 19695514,
-          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
-          score: 432,
-          time: 1555629108,
-          title: "Mozilla WebThings",
-          type: "story",
-          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
-          __lastUpdated: 1555677549810,
-        },
-        {
-          by: "sohkamyung",
-          descendants: 105,
-          id: 19695515,
-          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
-          score: 432,
-          time: 1555629108,
-          title: "Mozilla WebThings",
-          type: "story",
-          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
-          __lastUpdated: 1555677549810,
-        },
-        {
-          by: "sohkamyung",
-          descendants: 105,
-          id: 19695516,
-          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
-          score: 432,
-          time: 1555629108,
-          title: "Mozilla WebThings",
-          type: "story",
-          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
-          __lastUpdated: 1555677549810,
-        },
-        {
-          by: "sohkamyung",
-          descendants: 105,
-          id: 19695517,
-          kids: [19695817, 19696962, 19695831, 19698787, 19697151, 19698341, 19697509, 19696531, 19696125, 19695736, 19697648, 19696057, 19695998, 19695938, 19696670, 19696734, 19695677],
-          score: 432,
-          time: 1555629108,
-          title: "Mozilla WebThings",
-          type: "story",
-          url: "https://hacks.mozilla.org/2019/04/introducing-mozilla-webthings/",
-          __lastUpdated: 1555677549810,
-        }
-      ];
 
-      const stories = tempStories.map(x => ({
-        ...x, 
-        host: extractHost(x.url),
-        timeStamp: calcTime(x.time)
-      }));
-      yield new Promise(r => setTimeout(r, 1000));
+    /**
+     * ```
+     * {
+     *  by: "chwolfe",
+     *  descendants: 0,
+     *  id: 19698598,
+     *  score: 17,
+     *  time: 1555673078,
+     *  title: "Learning Parser Combinators with Rust",
+     *  type: "story",
+     *  url: "https://bodil.lol/parser-combinators/",
+     *  __lastUpdated: 1555677549809,
+     *  }
+     * ```
+     *    **对story字段进行预处理**
+     *   1. extract url host;
+     *   2. calc time (_ hours ago)
+     *   3. ..
+     *   4. 经测试，数十次请求的速度并不会特别慢
+     */
+    *QUERY_STORIES({payload: {page}}, {call, put, select}) {
+      yield put({type: 'save', payload: {currentPage: page}});
+      const {totalIDs, pageSize} = yield select(state => state.modelGlobal);
+      const start = (page - 1) * pageSize;
+      const aimIDs = totalIDs.slice(start, start + pageSize);
+      const stories = (yield call(serviceGlobal.fetchStories, aimIDs))
+        .map(x => ({
+          ...x,
+          host: extractHost(x.url),
+          timeStamp: calcTime(x.time)
+        }));
       yield put({type: 'save', payload: {stories}});
+
     }
   },
 

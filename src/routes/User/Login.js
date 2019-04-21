@@ -15,6 +15,7 @@ class NormalLoginForm extends React.Component {
 
     render() {
         const {getFieldDecorator} = this.props.form;
+        console.log('what??');
         return (
             <div className={styles.loginContainer}> 
                 <h1>Hacker News</h1>

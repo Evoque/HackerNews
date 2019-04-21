@@ -7,9 +7,8 @@ import styles from './index.less';
 const NS_QUERY_LIST = 'modelGlobal/QUERY_STORY_IDS';
 class Header extends React.Component {
 
-  componentDidMount() {
-    const {currentStory, dispatch} = this.props;
-    dispatch({type: NS_QUERY_LIST, payload: {type: currentStory}});
+  componentDidMount() { 
+    this.props.dispatch({type: NS_QUERY_LIST, payload: {}});
   }
 
   handleClick = e => {
@@ -19,12 +18,12 @@ class Header extends React.Component {
   };
 
   render() {
-    const {currentStory} = this.props;
+    const {currentStoryType} = this.props;
     return (
       <div className={styles.headerContainer}>
         <Menu
           onClick={this.handleClick}
-          selectedKeys={[currentStory]}
+          selectedKeys={[currentStoryType]}
           mode="horizontal"
         >
           <Menu.Item key="logo-disable" className={styles.logo}>
@@ -43,7 +42,7 @@ class Header extends React.Component {
 
 function mapStateToProps({modelGlobal}) {
   return {
-    currentStory: modelGlobal.currentStory
+    currentStoryType: modelGlobal.currentStoryType
   }
 }
 

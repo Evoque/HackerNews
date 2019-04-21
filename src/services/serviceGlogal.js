@@ -31,7 +31,7 @@ export function fetchUser(id){
   return fetch(`user/${id}`);
 }
 
-export function fetchStoryByID(id){
+export function fetchStoryByID(id){ 
   return fetch(`item/${id}`);
 }
 
