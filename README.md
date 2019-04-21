@@ -34,7 +34,7 @@ This repository contains all resources of the micro project:
   - [ ] interaction
 - [x] user page 
   - [x] login: fake login, *not find the api*
-  - [x] profile
+  - [x] profile: self  & other author
 - [ ] engineering
   - [ ] code splitting
   - [ ] SSR?

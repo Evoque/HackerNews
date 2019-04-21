@@ -1,14 +1,29 @@
 import React from 'react';
-import {Card, Avatar, Row, Icon} from 'antd';
+import {Card, Avatar, Row, Icon, Skeleton} from 'antd';
 import formatHelper from 'Utils/formatHelper';
-import styles from './Profile.less';
+import styles from './index.less';
 
 const centerStyle = {textAlign: 'center'};
-
+const cardStyle = {width: 500, margin: '20px auto', borderRadius: '4px'};
+const {Meta} = Card;
 export default ({userInfo}) => {
+
+    if (!userInfo) {
+        return (
+            <Card style={cardStyle} >
+                <Skeleton loading={true} avatar active>
+                    <Meta
+                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                    />
+                </Skeleton>
+            </Card>
+        )
+    }
+
+
     const {id, created, submitted} = userInfo;
     return (
-        <Card style={{width: 500, margin: '20px auto'}} >
+        <Card style={cardStyle} >
             <Row style={centerStyle}>
                 <Avatar size={64} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
             </Row>

@@ -3,7 +3,7 @@
 import React from 'react';
 import {connect} from 'dva'; 
 import Login from './Login';
-import Profile from './Profile';
+import Profile from 'Components/Profile';
 
 class User extends React.Component {
 

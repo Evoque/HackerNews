@@ -8,18 +8,25 @@ import storageHelper from 'Utils/storageHelper';
 const initStories = new Array(1);
 const visitedIDs = storageHelper.getVisitedIDs();
 const user = storageHelper.getUser();
+const initType = STORIES[0].value;
 export default {
 
   namespace: 'modelGlobal',
 
   state: {
-    currentStoryType: STORIES[0].value,
+    currentStoryType: initType,
     totalIDs: [],
     visitedIDs: visitedIDs,
     currentPage: 1,
     pageSize: 15,
     stories: initStories,
-    userInfo: user
+    userInfo: user,
+    // 其他用户信息
+    otherUser: undefined,
+
+    // 限制请求频度
+    loadingTime: Date.now(),
+    loadingType: undefined
   },
 
   subscriptions: {
@@ -33,7 +40,14 @@ export default {
     *QUERY_STORY_IDS({payload: {type}}, {call, put}) {
       if (!type) return;
       console.log(`fetch  ${type}`);
-      yield put({type: 'save', payload: {currentStoryType: type, stories: initStories}});
+      yield put({
+        type: 'save', payload: {
+          currentStoryType: type,
+          stories: initStories,
+          loadingTime: Date.now(),
+          loadingType: type
+        }
+      });
       const ids = yield call(serviceGlobal.fetchStoryIDSByType, type);
       yield put({type: 'save', payload: {totalIDs: ids}});
       yield put({type: 'QUERY_STORIES', payload: {page: 1}});
@@ -76,8 +90,13 @@ export default {
     *QUERY_USER({payload: {username}}, {call, put}) {
       const userInfo = yield call(serviceGlobal.fetchUser, username);
       storageHelper.setUser(userInfo);
-      console.log(userInfo);
       yield put({type: 'save', payload: {userInfo}});
+    },
+    *QUERY_OTHER_USER({payload: {by}}, {call, put}) {
+      yield put({type: 'save', payload: {otherUser: undefined}});
+      const otherUser = yield call(serviceGlobal.fetchUser, by);
+      console.log(otherUser)
+      yield put({type: 'save', payload: {otherUser}});
     }
 
   },
