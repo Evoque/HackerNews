@@ -32,6 +32,7 @@ export function fetchUser(id){
 }
 
 export function fetchStoryByID(id){ 
+  console.log(`fetch single ${id}`);
   return fetch(`item/${id}`);
 }
 
