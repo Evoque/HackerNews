@@ -32,7 +32,9 @@ This repository contains all resources of the micro project:
   - [x] comments: item style, render link, collapsible,add comment, show more subcomments
   - [x] subcomments: subitem style, add subcomment, hide
   - [ ] interaction
-- [x] user page
+- [x] user page 
+  - [x] login: fake login, *not find the api*
+  - [x] profile
 - [ ] engineering
   - [ ] code splitting
   - [ ] SSR?
