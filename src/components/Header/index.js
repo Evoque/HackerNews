@@ -13,7 +13,7 @@ class Header extends React.Component {
     return (
       <div className={styles.headerContainer}>
         <Menu selectedKeys={[type]} mode="horizontal" >
-          <Menu.Item key="logo-disable" className={styles.logo}>
+          <Menu.Item key="logo" className={styles.logo}>
             <img src="assets/y18.gif" alt="logo" />
           </Menu.Item>
           {
@@ -21,7 +21,7 @@ class Header extends React.Component {
               <Link to={`/${value}`}>{title}</Link>
             </Menu.Item>)
           }
-          <Menu.Item key="user-no_fetch" className={styles.user}>
+          <Menu.Item key="user" className={styles.user}>
             <Link to="/user"><Icon type="user" /></Link>
           </Menu.Item>
         </Menu>

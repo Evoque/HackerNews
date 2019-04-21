@@ -3,8 +3,7 @@ import {connect} from "dva";
 import {Spin} from "antd";
 import Pagination from "./Pagination";
 import Item from "Components/MiniItem";
-import Skeleton from "Components/Skeleton";
-import {STORIES} from 'Common/constants';
+import Skeleton from "Components/Skeleton"; 
 import styles from "./index.less";
 
 const NS_QUERY_STORIES = "modelGlobal/QUERY_STORIES";

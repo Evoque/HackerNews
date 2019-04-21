@@ -37,7 +37,8 @@ This repository contains all resources of the micro project:
   - [ ] code splitting
   - [ ] SSR?
 
-
+## Declaration
+The login page doesn't actually work(because not found the login api). Just make sure your `username` is right,  and don't care about password or type anything.
 
 ## ?
 1. How to detect the user voted or not? the user's `submitted` doesn't contain the voted ids.

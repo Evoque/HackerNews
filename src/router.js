@@ -3,13 +3,14 @@ import React from 'react';
 import {router} from 'dva';
 import Home from './routes/Home';
  
-const { Router, Route, Switch } = router;  
+const { Router, Route, Switch, Redirect } = router;  
 
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
       <Switch>
         <Route path="/:type" component={props => <Home {...props}/>} />
+        <Redirect to="/top" />
       </Switch>
     </Router>
   );
