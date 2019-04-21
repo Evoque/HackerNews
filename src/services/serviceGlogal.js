@@ -31,8 +31,7 @@ export function fetchUser(id){
   return fetch(`user/${id}`);
 }
 
-export function fetchStoryByID(id){ 
-  console.log(`fetch single ${id}`);
+export function fetchStoryByID(id){   
   return fetch(`item/${id}`);
 }
 

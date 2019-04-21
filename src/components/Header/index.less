@@ -1,10 +1,11 @@
 @import '~Common/variables.less';
 
+@colorDark: rgba(255, 255, 255, .7);
 .headerContainer {
     background-color: @colorMain;
     color: #fff;
 
-    .logo { 
+    .logo {
         img {
             width: 24px;
             height: 24px;
@@ -13,14 +14,18 @@
     }
 
     .user {
-        float: right;  
-        :global {
-            .anticon {
-                font-size: 1.6em; 
-                font-weight: bold;
-                vertical-align: middle;
+        float: right;
+
+        a {
+            :global {
+                .anticon {
+                    font-size: 1.6em;
+                    font-weight: bold;
+                    vertical-align: middle;
+                }
             }
-        }  
+        }
+
     }
 
     :global {
@@ -29,7 +34,7 @@
             margin: 0 auto;
             background-color: transparent;
             border: none;
-            color: rgba(255, 255, 255, .7);
+            color: @colorDark;
             font-size: 1.2em;
             line-height: 52px;
             padding-bottom: 4px;
@@ -41,20 +46,33 @@
                     transition: all .1s ease; 
                 }
 
-                &>.ant-menu-item-selected {
-                    color: #fff;
+                &>.ant-menu-item-selected { 
                     border: none;
                     font-weight: bold;
+                    a {
+                        color: #fff;
+                    }
                 }
 
                 &>.ant-menu-item:hover,
-                &>.ant-menu-item-active {
-                    color: #fff;
+                &>.ant-menu-item-active { 
                     border: none;
+                    a {
+                        color: #fff;
+                    }
                 }
 
             }
 
+        }
+    }
+}
+
+:global {
+    .ant-menu-horizontal>.ant-menu-item>a {
+        color: @colorDark;
+        &:hover {
+            color: #fff;
         }
     }
 }

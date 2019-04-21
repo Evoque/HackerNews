@@ -9,7 +9,7 @@ function RouterConfig({ history }) {
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/" component={() => <Home />} />
+        <Route path="/:type" component={props => <Home {...props}/>} />
       </Switch>
     </Router>
   );

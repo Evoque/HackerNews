@@ -26,11 +26,11 @@ export default {
   },
 
   effects: {
-    *QUERY_STORY_IDS({payload: {type = STORIES[0].value}}, {call, put}) {
+    *QUERY_STORY_IDS({payload: {type}}, {call, put}) {
+      if(!type) return;
       console.log(`fetch  ${type}`);
       yield put({type: 'save', payload: {currentStoryType: type, stories: initStories}});
-      const ids = yield call(serviceGlobal.fetchStoryIDSByType, type);
-      console.log(`get ids: ${ids}`);
+      const ids = yield call(serviceGlobal.fetchStoryIDSByType, type); 
       yield put({type: 'save', payload: {totalIDs: ids}});
       yield put({type: 'QUERY_STORIES', payload: {page: 1}});
     },
