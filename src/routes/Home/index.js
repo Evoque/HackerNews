@@ -11,8 +11,8 @@ import styles from './index.less';
 const {Route, Switch} = router;
 class Home extends React.Component {
 
-    render() { 
-        const {type} = this.props.match.params;
+    render() {
+        const {type} = this.props.match.params; 
         return (
             <div>
                 <Header type={type} />
@@ -30,7 +30,6 @@ class Home extends React.Component {
             </div>
         )
     }
-
 }
 
 export default Home;

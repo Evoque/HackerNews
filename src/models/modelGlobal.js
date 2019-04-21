@@ -6,6 +6,7 @@ import formatHelper from 'Utils/formatHelper';
 import storageHelper from 'Utils/storageHelper';
 
 const initStories = new Array(1);
+const visitedIDs = storageHelper.getVisitedIDs();
 export default {
 
   namespace: 'modelGlobal',
@@ -13,6 +14,7 @@ export default {
   state: {
     currentStoryType: STORIES[0].value,
     totalIDs: [],
+    visitedIDs: visitedIDs,
     currentPage: 1,
     pageSize: 15,
     stories: initStories,
@@ -82,6 +84,9 @@ export default {
     save(state, action) {
       return {...state, ...action.payload};
     },
+    saveVisitedIDs(state, {payload: {id}}) {
+      return {...state, visitedIDs: {...state.visitedIDs, [id]: true}}
+    }
   },
 
 };

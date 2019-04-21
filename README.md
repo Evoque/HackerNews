@@ -24,8 +24,8 @@ This repository contains all resources of the micro project:
 - [ ] home page
   - [x] container panel style
   - [x] item panel style
-  - [ ] grey out readed stories 
-  - [ ] vote / unvote
+  - [x] grey out readed stories 
+  - [ ] ~~vote / unvote:~~ *not find the api*
 - [ ] comment list page
 - [ ] comment detail page
   - [x] header: style, input area, add comment, `like/dislike ?`..
