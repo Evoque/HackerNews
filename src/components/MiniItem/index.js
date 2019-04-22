@@ -24,7 +24,7 @@ export default ({item, onItemClick, visited}) => {
                 <span>
                     by &nbsp;<Link to={`/profile/${by}`} className={styles.underline}>{`${by}`}</Link>
                     <span>{` ${timeStamp} ago | `}</span>
-                    <span className={styles.underline}>{`${8} comments`}</span>
+                    <Link to={`/item/${id}`} className={styles.underline}>{`${8} comments`}</Link>
                 </span>
             </div>
         </div>

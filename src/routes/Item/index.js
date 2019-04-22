@@ -1,7 +1,7 @@
 
 import React from 'react';
+import {connect} from 'dva';
 import {Input, Button, Collapse} from 'antd';
-// import he from 'he';
 import linker from 'Utils/linker';
 import parse from 'html-react-parser';
 import styles from './index.less';
@@ -47,7 +47,7 @@ const subComment1 = {
     "text": "I completely disregard this rule. I find it much more helpful to be able to include more context in the message (even the first line).<p>I have a similar policy about line-lengths in code files. Sure, lines can be too long, but I find that codebases with strict line-length policies tend to have the opposite problem: too much vertical drift which makes it hard to see the big-picture of what is going on in the file.",
     "time": 1555754618,
     "type": "comment"
-}; 
+};
 
 const comment1 = {
     "by": "chipotle_coyote1",
@@ -61,7 +61,13 @@ const comment1 = {
 
 const Panel = Collapse.Panel;
 
-export default class Item extends React.Component {
+class Item extends React.Component {
+
+    componentDidMount() {
+        const {match, dispatch} = this.props; 
+        const {id} = match.params;
+        dispatch({type: 'modelGlobal/QUERY_STORY', payload: {id}});
+    }
 
     render() {
 
@@ -128,5 +134,6 @@ export default class Item extends React.Component {
             </div>
         )
     }
-
 }
+
+export default connect()(Item);

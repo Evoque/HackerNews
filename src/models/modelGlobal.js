@@ -58,19 +58,14 @@ export default {
     *QUERY_STORY_IDS({payload: {type}}, {call, put}) {
 
       if (!type) return;
-
-      console.log(Cache_Story);
       const cacheStory = Cache_Story[type];
       // less than 1 minutes use caches
       if (cacheStory && (Date.now() - cacheStory.__lastUpdated) < 30 * 1000) {
-        console.log('use cache');
-        console.log(Date.now() - cacheStory.__lastUpdated);
         const {IDs, stories} = cacheStory;
         yield put({type: 'save', payload: {totalIDs: IDs, stories}});
         return;
       }
 
-      console.log(`fetch  ${type}`);
       const ids = yield call(serviceGlobal.fetchStoryIDSByType, type);
 
       Cache_Story[type] = {__lastUpdated: Date.now(), IDs: ids};
@@ -100,8 +95,6 @@ export default {
      *   4. 经测试，数十次请求的速度并不会特别慢
      */
     *QUERY_STORIES({payload: {type, page}}, {call, put, select}) {
- 
-      console.log(`fetch: ${type}, page: ${page}`);
       const {pageInfo, totalIDs, pageSize} = yield select(state => state.modelGlobal);
       yield put({type: 'save', payload: {pageInfo: {...pageInfo, [type]: page}}});
       const start = (page - 1) * pageSize;
@@ -113,6 +106,7 @@ export default {
           timeStamp: formatHelper.calcTime(x.time)
         }));
 
+      console.log(stories);
       Cache_Story[type].__lastUpdated = Date.now();
       Cache_Story[type].stories = stories;
       yield put({type: 'save', payload: {stories}});
@@ -123,19 +117,28 @@ export default {
       storageHelper.setUser(userInfo);
       yield put({type: 'save', payload: {userInfo}});
     },
-    *QUERY_OTHER_USER({payload: {by}}, {call, put, select}) {
+    *QUERY_OTHER_USER({payload: {by}}, {call, put}) {
 
       const cacheUser = Cache_User[by];
       let otherUser;
       if (cacheUser && Date.now() - cacheUser.__lastUpdated < 5 * 60 * 1000) {
         otherUser = cacheUser;
       } else {
-        console.log(`fetch user: ${by}`);
         yield put({type: 'save', payload: {otherUser: undefined}});
         otherUser = yield call(serviceGlobal.fetchUser, by);
         Cache_User[by] = otherUser;
       }
       yield put({type: 'save', payload: {otherUser}});
+    },
+
+    *QUERY_STORY({payload: {id}}, {select}){
+      const {stories} = yield select(state => state.modelGlobal); 
+      let story = stories.find(x => x && x.id === +id); 
+      if(!story) {
+
+      }
+      console.log(story);
+      console.log('++')
     }
 
   },
