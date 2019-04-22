@@ -31,9 +31,7 @@ class Header extends React.Component {
 }
 
 function mapStateToProps({modelGlobal}) {
-  return {
-    currentStoryType: modelGlobal.currentStoryType
-  }
+  return { }
 }
 
 export default connect(mapStateToProps)(Header);

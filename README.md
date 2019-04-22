@@ -26,7 +26,8 @@ This repository contains all resources of the micro project:
   - [x] item panel style
   - [x] grey out readed stories 
   - [ ] ~~vote / unvote:~~ *not find the api*
-  - [ ] story cache & update
+  - [x] story cache & update
+    - [x] use cache story within 30 seconds 
 - [ ] ~~comment list page~~, *not find the api*
 - [ ] comment detail page
   - [x] header: style, input area, add comment, `like/dislike ?`..

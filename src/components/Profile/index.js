@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card, Avatar, Row, Icon, Skeleton} from 'antd';
 import formatHelper from 'Utils/formatHelper';
+import imgHead from 'Assets/head.png';
 import styles from './index.less';
 
 const centerStyle = {textAlign: 'center'};
@@ -13,7 +14,7 @@ export default ({userInfo}) => {
             <Card style={cardStyle} >
                 <Skeleton loading={true} avatar active>
                     <Meta
-                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                        avatar={<Avatar src={imgHead} />}
                     />
                 </Skeleton>
             </Card>
@@ -25,7 +26,7 @@ export default ({userInfo}) => {
     return (
         <Card style={cardStyle} >
             <Row style={centerStyle}>
-                <Avatar size={64} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                <Avatar size={64} src={imgHead} />
             </Row>
             <h2 style={centerStyle}>{id}</h2>
             <p style={centerStyle}>{`about ${id}`}</p>

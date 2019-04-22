@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "dva";
-import {Spin, notification} from "antd";
+import {Spin} from "antd";
 import Pagination from "./Pagination";
 import Item from "Components/MiniItem";
 import Skeleton from "Components/Skeleton";
@@ -8,6 +8,7 @@ import storageHelper from 'Utils/storageHelper';
 import {STORIES} from 'Common/constants';
 import styles from "./index.less";
 
+const NS_QUREY_STORY_IDS = "modelGlobal/QUERY_STORY_IDS";
 const NS_QUERY_STORIES = "modelGlobal/QUERY_STORIES";
 class ItemList extends React.Component {
 
@@ -20,22 +21,10 @@ class ItemList extends React.Component {
   }
 
   invokeQueryStoryIDs = () => {
-    const {type, dispatch, modelGlobal} = this.props;
-    if(!STORIES.find(x => x.value === type)) return;
-
-    const {loadingType, loadingTime} = modelGlobal; 
-    const interval = Date.now() - loadingTime;
-    // 同type 10s, 不同type 5s
-    let canLoading = !loadingType || interval > 10000 || (loadingType !== type && interval > 5);
-    if (canLoading) {
-      dispatch({type: 'modelGlobal/QUERY_STORY_IDS', payload: {type}});
-      window.addEventListener('beforeunload', this.handleSaveVisitedIDs, false);
-    } else {
-      notification.warn({
-        key: 'canLoading-warn',
-        message: '您的操作过于频繁'
-      });
-    }
+    const {type, dispatch} = this.props;
+    if (!STORIES.find(x => x.value === type)) return;
+    dispatch({type: NS_QUREY_STORY_IDS, payload: {type}});
+    window.addEventListener('beforeunload', this.handleSaveVisitedIDs, false);
   }
 
   handleSaveVisitedIDs = () => {
@@ -46,7 +35,8 @@ class ItemList extends React.Component {
   }
 
   handlePageChange = page => {
-    this.props.dispatch({type: NS_QUERY_STORIES, payload: {page}});
+    const {type, dispatch} = this.props;
+    dispatch({type: NS_QUERY_STORIES, payload: {type, page}});
   };
 
   handleItemClick = id => {
@@ -55,13 +45,13 @@ class ItemList extends React.Component {
       payload: {id}
     });
   };
- 
+
 
   render() {
-    const {modelGlobal, loading} = this.props;
-    const {stories = [], currentPage, pageSize, totalIDs, visitedIDs} = modelGlobal;
+    const {modelGlobal, type, loading} = this.props;
+    const {stories = [], pageInfo, pageSize, totalIDs, visitedIDs} = modelGlobal;
     const firstLoad = stories.length === 1 && !stories[0];
-    const spinning = !firstLoad && loading.effects[NS_QUERY_STORIES];
+    const spinning = !firstLoad && (loading.effects[NS_QUERY_STORIES] || loading.effects[NS_QUREY_STORY_IDS]) ;  
     return (
       <Spin spinning={spinning}>
         <div className={styles.listContainer}>
@@ -73,13 +63,13 @@ class ItemList extends React.Component {
                   <Item key={x.id}
                     item={x}
                     visited={visitedIDs[x.id]}
-                    onItemClick={this.handleItemClick} 
+                    onItemClick={this.handleItemClick}
                   />
                 ))
                 .concat(
                   <Pagination
                     key="pager"
-                    current={currentPage}
+                    current={pageInfo[type] || 1}
                     pageSize={pageSize}
                     total={totalIDs.length}
                     onChange={this.handlePageChange}

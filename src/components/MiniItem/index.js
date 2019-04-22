@@ -22,7 +22,7 @@ export default ({item, onItemClick, visited}) => {
                     <span className={styles.host}>{` (${host})`}</span>
                 </span>
                 <span>
-                    by &nbsp;<Link to={`/profile/${by}`}>{`${by}`}</Link>
+                    by &nbsp;<Link to={`/profile/${by}`} className={styles.underline}>{`${by}`}</Link>
                     <span>{` ${timeStamp} ago | `}</span>
                     <span className={styles.underline}>{`${8} comments`}</span>
                 </span>

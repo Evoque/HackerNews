@@ -1,35 +1,50 @@
 
 
 import * as serviceGlobal from './../services/serviceGlogal';
-import {STORIES} from 'Common/constants';
 import formatHelper from 'Utils/formatHelper';
 import storageHelper from 'Utils/storageHelper';
 
 const initStories = new Array(1);
 const visitedIDs = storageHelper.getVisitedIDs();
 const user = storageHelper.getUser();
-const initType = STORIES[0].value;
 
 /** user Cache */
 let Cache_User = {};
+
+/**
+ * story cache 
+ * ```json
+ * {
+ *   "top": {
+ *        __lastUpdated: 11111,
+ *        IDs: [],
+ *        stories: []
+ *    }
+ * }
+ * ```
+ */
+let Cache_Story = {};
 export default {
 
   namespace: 'modelGlobal',
 
   state: {
-    currentStoryType: initType,
     totalIDs: [],
     visitedIDs: visitedIDs,
-    currentPage: 1,
+    // currentPage: 1,
+
+    /**
+     * {
+     *   "top": 1,
+     *   "new": 2
+     * }
+     */
+    pageInfo: {},
     pageSize: 15,
     stories: initStories,
     userInfo: user,
     // 其他用户信息
     otherUser: undefined,
-
-    // 限制请求频度
-    loadingTime: Date.now(),
-    loadingType: undefined
   },
 
   subscriptions: {
@@ -41,19 +56,27 @@ export default {
 
   effects: {
     *QUERY_STORY_IDS({payload: {type}}, {call, put}) {
+
       if (!type) return;
+
+      console.log(Cache_Story);
+      const cacheStory = Cache_Story[type];
+      // less than 1 minutes use caches
+      if (cacheStory && (Date.now() - cacheStory.__lastUpdated) < 30 * 1000) {
+        console.log('use cache');
+        console.log(Date.now() - cacheStory.__lastUpdated);
+        const {IDs, stories} = cacheStory;
+        yield put({type: 'save', payload: {totalIDs: IDs, stories}});
+        return;
+      }
+
       console.log(`fetch  ${type}`);
-      yield put({
-        type: 'save', payload: {
-          currentStoryType: type,
-          stories: initStories,
-          loadingTime: Date.now(),
-          loadingType: type
-        }
-      });
       const ids = yield call(serviceGlobal.fetchStoryIDSByType, type);
+
+      Cache_Story[type] = {__lastUpdated: Date.now(), IDs: ids};
       yield put({type: 'save', payload: {totalIDs: ids}});
-      yield put({type: 'QUERY_STORIES', payload: {page: 1}});
+      yield put({type: 'QUERY_STORIES', payload: {type, page: 1}});
+
     },
 
     /**
@@ -76,9 +99,11 @@ export default {
      *   3. ..
      *   4. 经测试，数十次请求的速度并不会特别慢
      */
-    *QUERY_STORIES({payload: {page}}, {call, put, select}) {
-      yield put({type: 'save', payload: {currentPage: page}});
-      const {totalIDs, pageSize} = yield select(state => state.modelGlobal);
+    *QUERY_STORIES({payload: {type, page}}, {call, put, select}) {
+ 
+      console.log(`fetch: ${type}, page: ${page}`);
+      const {pageInfo, totalIDs, pageSize} = yield select(state => state.modelGlobal);
+      yield put({type: 'save', payload: {pageInfo: {...pageInfo, [type]: page}}});
       const start = (page - 1) * pageSize;
       const aimIDs = totalIDs.slice(start, start + pageSize);
       const stories = (yield call(serviceGlobal.fetchStories, aimIDs))
@@ -87,6 +112,9 @@ export default {
           host: formatHelper.extractHost(x.url),
           timeStamp: formatHelper.calcTime(x.time)
         }));
+
+      Cache_Story[type].__lastUpdated = Date.now();
+      Cache_Story[type].stories = stories;
       yield put({type: 'save', payload: {stories}});
     },
 

@@ -4,8 +4,7 @@ import Profile from 'Components/Profile';
 
 class OtherUser extends React.Component {
 
-    componentDidMount() {
-        console.log(this.props);
+    componentDidMount() { 
         const {by} = this.props.match.params;
         if (by) {
             this.props.dispatch({type: 'modelGlobal/QUERY_OTHER_USER', payload: {by}});
