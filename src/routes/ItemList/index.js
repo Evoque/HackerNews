@@ -26,7 +26,7 @@ class ItemList extends React.Component {
     const {loadingType, loadingTime} = modelGlobal; 
     const interval = Date.now() - loadingTime;
     // 同type 10s, 不同type 5s
-    let canLoading = !loadingType || interval > 10000 || (loadingType != type && interval > 5);
+    let canLoading = !loadingType || interval > 10000 || (loadingType !== type && interval > 5);
     if (canLoading) {
       dispatch({type: 'modelGlobal/QUERY_STORY_IDS', payload: {type}});
       window.addEventListener('beforeunload', this.handleSaveVisitedIDs, false);

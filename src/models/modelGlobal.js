@@ -9,6 +9,9 @@ const initStories = new Array(1);
 const visitedIDs = storageHelper.getVisitedIDs();
 const user = storageHelper.getUser();
 const initType = STORIES[0].value;
+
+/** user Cache */
+let Cache_User = {};
 export default {
 
   namespace: 'modelGlobal',
@@ -92,10 +95,18 @@ export default {
       storageHelper.setUser(userInfo);
       yield put({type: 'save', payload: {userInfo}});
     },
-    *QUERY_OTHER_USER({payload: {by}}, {call, put}) {
-      yield put({type: 'save', payload: {otherUser: undefined}});
-      const otherUser = yield call(serviceGlobal.fetchUser, by);
-      console.log(otherUser)
+    *QUERY_OTHER_USER({payload: {by}}, {call, put, select}) {
+
+      const cacheUser = Cache_User[by];
+      let otherUser;
+      if (cacheUser && Date.now() - cacheUser.__lastUpdated < 5 * 60 * 1000) {
+        otherUser = cacheUser;
+      } else {
+        console.log(`fetch user: ${by}`);
+        yield put({type: 'save', payload: {otherUser: undefined}});
+        otherUser = yield call(serviceGlobal.fetchUser, by);
+        Cache_User[by] = otherUser;
+      }
       yield put({type: 'save', payload: {otherUser}});
     }
 
