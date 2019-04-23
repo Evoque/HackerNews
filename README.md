@@ -3,6 +3,11 @@
 
 > HackerNews created by React
 
+## Presentation
+![p0](./video/p0.png)
+![p1](./video/p4.png)
+
+> you can also download the video in the `video` folder
 
 ## Introduction
 This repository contains all resources of the micro project:
